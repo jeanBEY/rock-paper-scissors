@@ -3,11 +3,35 @@
     <head>
         <meta charset="UTF-8"/>
         <title>Rock Paper Scissors</title>
+
+        <script defer src="javascript.js">
+        </script>
+
     </head>
     <body>
 
-        <script src="javascript.js">
-        </script>
+        <h2>ROCK, PAPER, SCISSORS!</h2>
+        
+        <div id="message">*First to score 5 points wins</div>
+        
+        <div class="scoreContainer">
+            <div class="scoreSection">
+                <div id="playerScore" data-score="0">PLAYER: 0</div>
+            </div>
+            <div class="scoreSection">
+                <div id="computerScore" data-score="0">COMPUTER: 0</div>
+            </div>
+        </div>
+
+        <div id="roundContainer">
+            <div id="roundInfo" data-round="1">ROUND: 1</div>
+        </div>
+
+        <div class="buttons">
+            <button id="rockBtn">ROCK</button>
+            <button id="paperBtn">PAPER</button>
+            <button id="scissorsBtn">SCISSORS</button>
+        </div>
 
     </body>
 

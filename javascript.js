@@ -1,141 +1,88 @@
-function getComputerChoice() {
+const rockButton = document.getElementById("rockBtn");
+const paperButton = document.getElementById("paperBtn");
+const scissorsButton = document.getElementById("scissorsBtn");
+const message = document.getElementById("message");
+const round = document.getElementById("roundInfo");
+const playerScore = document.getElementById("playerScore");
+const computerScore = document.getElementById("computerScore");
+
+//message.textContent = "You won!";
+//console.log(playerScore);
+//console.log(round);
+//playerScore.dataset.score = parseInt(playerScore.dataset.score) + 2;
+//round.dataset.round = parseInt(round.dataset.round) + 1;
+
+//CLICK EVENTS
+rockButton.addEventListener('click', () => {
+    playRound('rock', getComputerSelection());
+});
+
+paperButton.addEventListener('click', () => {
+    playRound('paper', getComputerSelection());
+});
+
+scissorsButton.addEventListener('click', () => {
+    playRound('scissors', getComputerSelection());
+});
+
+//FUNCTIONS
+function getComputerSelection() {
     let number;
-    let compChoice;
+    let computerChoice;
     number = Math.floor(Math.random() * 3) + 1;
 
     if(number === 1){
-        compChoice = "rock";
+        computerChoice = "rock";
     } 
     else if(number === 2){
-        compChoice = "paper";
+        computerChoice = "paper";
     }
     else{
-        compChoice = "scissors";
+        computerChoice = "scissors";
     }
 
-    return compChoice;
+    return computerChoice;
 }
 
 function playRound(playerSelection, computerSelection){
 
     playerSelection = playerSelection.toLowerCase();
 
-    if(playerSelection == "scissors" && computerSelection == "rock"){
-        return "computer";
-    }
-    if(playerSelection == "paper" && computerSelection == "scissors"){
-        return "computer";
-    }
-    if(playerSelection == "rock" && computerSelection == "paper"){
-        return "computer";
-    }
-    if(computerSelection == "scissors" && playerSelection == "rock"){
-        return "player";
-    }
-    if(computerSelection == "paper" && playerSelection == "scissors"){
-        return "player";
-    }
-    if(computerSelection == "rock" && playerSelection == "paper"){
-        return "player";
-    }
-    else {
-        return "No Winner!  Play again!";
+    if(playerSelection == "scissors" && computerSelection == "rock" ||
+        playerSelection == "paper" && computerSelection == "scissors"|| 
+        playerSelection == "rock" && computerSelection == "paper"){
+            
+            computerScore.dataset.score = parseInt(computerScore.dataset.score) + 1;
+            computerScore.textContent = "COMPUTER: " + computerScore.dataset.score;
+            updateMessage('computer');
+        }
+    if(computerSelection == "scissors" && playerSelection == "rock" ||
+        computerSelection == "paper" && playerSelection == "scissors" ||
+        computerSelection == "rock" && playerSelection == "paper"){
+            
+            playerScore.dataset.score = parseInt(playerScore.dataset.score) + 1;
+            playerScore.textContent = "PLAYER: " + playerScore.dataset.score;
+            updateMessage('player');
+        }
+
+    else{
+            updateMessage();
     }
 
 }
 
-function game() {
+function updateMessage(winner){
 
-    let playerScore = 0;
-    let computerScore = 0;
-    let roundResults;
+    round.dataset.round = parseInt(round.dataset.round) + 1;
+    round.textContent = "ROUND: " + round.dataset.round;
 
-    //ROUND 1
-    let playerSelection = prompt("Choose by typing rock, paper or scissors");
-    roundResults = playRound(playerSelection,getComputerChoice());
-    if(roundResults == "player"){
-        playerScore++;
-        console.log("You win this round!");
+    if(winner == "player"){
+        message.textContent = "You WON that round!  Great job!";
     }
-    else if(roundResults = "computer"){
-        computerScore++;
-        console.log("Computer wins this round!");
+    else if(winner == "computer"){
+        message.textContent = "You LOST that round!  Womp womp...";
     }
-    else {
-        console.log("No winner this round...");
+    else{
+        message.textContent = "It was a TIE that round!";
     }
-
-    //ROUND 2
-    playerSelection = prompt("Choose by typing rock, paper or scissors");
-    roundResults = playRound(playerSelection,getComputerChoice());
-    if(roundResults == "player"){
-        playerScore++;
-        console.log("You win this round!");
-    }
-    else if(roundResults = "computer"){
-        computerScore++;
-        console.log("Computer wins this round!");
-    }
-    else {
-        console.log("No winner this round...");
-    }
-
-    //ROUND 3
-    playerSelection = prompt("Choose by typing rock, paper or scissors");
-    roundResults = playRound(playerSelection,getComputerChoice());
-    if(roundResults == "player"){
-        playerScore++;
-        console.log("You win this round!");
-    }
-    else if(roundResults = "computer"){
-        computerScore++;
-        console.log("Computer wins this round!");
-    }
-    else {
-        console.log("No winner this round...");
-    }
-
-    //ROUND 4
-    playerSelection = prompt("Choose by typing rock, paper or scissors");
-    roundResults = playRound(playerSelection,getComputerChoice());
-    if(roundResults == "player"){
-        playerScore++;
-        console.log("You win this round!");
-    }
-    else if(roundResults = "computer"){
-        computerScore++;
-        console.log("Computer wins this round!");
-    }
-    else {
-        console.log("No winner this round...");
-    }
-
-    //ROUND 5
-    playerSelection = prompt("Choose by typing rock, paper or scissors");
-    roundResults = playRound(playerSelection,getComputerChoice());
-    if(roundResults == "player"){
-        playerScore++;
-        console.log("You win this round!");
-    }
-    else if(roundResults = "computer"){
-        computerScore++;
-        console.log("Computer wins this round!");
-    }
-    else {
-        console.log("No winner this round...");
-    }
-
-    //DECLARE WINNER OF GAME
-    if(computerScore > playerScore){
-        console.log("Computer WINS!");
-    }
-    else if(playerScore > computerScore){
-        console.log("You WIN!");
-    }
-    else {
-        console.log("No winner....THE END");
-    }
-    
 }
-
-game();
