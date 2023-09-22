@@ -6,12 +6,6 @@ const round = document.getElementById("roundInfo");
 const playerScore = document.getElementById("playerScore");
 const computerScore = document.getElementById("computerScore");
 
-//message.textContent = "You won!";
-//console.log(playerScore);
-//console.log(round);
-//playerScore.dataset.score = parseInt(playerScore.dataset.score) + 2;
-//round.dataset.round = parseInt(round.dataset.round) + 1;
-
 //CLICK EVENTS
 rockButton.addEventListener('click', () => {
     playRound('rock', getComputerSelection());
@@ -56,7 +50,7 @@ function playRound(playerSelection, computerSelection){
             computerScore.textContent = "COMPUTER: " + computerScore.dataset.score;
             updateMessage('computer');
         }
-    if(computerSelection == "scissors" && playerSelection == "rock" ||
+    else if(computerSelection == "scissors" && playerSelection == "rock" ||
         computerSelection == "paper" && playerSelection == "scissors" ||
         computerSelection == "rock" && playerSelection == "paper"){
             
@@ -64,7 +58,6 @@ function playRound(playerSelection, computerSelection){
             playerScore.textContent = "PLAYER: " + playerScore.dataset.score;
             updateMessage('player');
         }
-
     else{
             updateMessage();
     }
@@ -78,11 +71,24 @@ function updateMessage(winner){
 
     if(winner == "player"){
         message.textContent = "You WON that round!  Great job!";
+        announceWinner();
     }
     else if(winner == "computer"){
         message.textContent = "You LOST that round!  Womp womp...";
+        announceWinner();
     }
     else{
         message.textContent = "It was a TIE that round!";
+        announceWinner();
+    }
+
+}
+
+function announceWinner(){
+    if(parseInt(playerScore.dataset.score) == 5){
+        message.textContent = "CONGRATS - YOU WIN THE GAME";
+    }
+    else if(parseInt(computerScore.dataset.score) == 5){
+        message.textContent = "SORRY - YOU LOST THE GAME";
     }
 }
